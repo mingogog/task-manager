@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import categories from "../categories";
+import Task from '../Task'
 
 const dateSchema = z.preprocess((arg) => {
   if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
@@ -20,7 +21,11 @@ const validationSchema = z
 
 type ValidationSchema = z.infer<typeof validationSchema>;
 
-const Form = () => {
+interface FormProps{
+  submitTask(data:Task): void
+}
+
+const Form: React.FC<FormProps> = ({submitTask}:FormProps) => {
   const {
     register,
     handleSubmit,
@@ -29,7 +34,11 @@ const Form = () => {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<ValidationSchema> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<ValidationSchema> = (data:Task) => {
+    data.id = Date.now()
+    console.log('onSubmit', data);
+    submitTask(data)
+  }
 
   return (
     <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
