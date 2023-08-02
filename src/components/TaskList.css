@@ -1,0 +1,7 @@
+.list-table th, 
+.list-table td, 
+.list-table tr{
+    border: 1px solid #E5E7EB;
+    padding: 5px 15px;
+    text-align: start;
+}
