@@ -35,8 +35,9 @@ const Form: React.FC<FormProps> = ({submitTask}:FormProps) => {
   });
 
   const onSubmit: SubmitHandler<ValidationSchema> = (data:Task) => {
+    const { dueDate } = data
     data.id = Date.now()
-    console.log('onSubmit', data);
+    data.date = `${dueDate.getFullYear()}/${dueDate.getMonth()}/${dueDate.getDate()}`
     submitTask(data)
   }
 
@@ -95,9 +96,9 @@ const Form: React.FC<FormProps> = ({submitTask}:FormProps) => {
         >
           Category
         </label>
-        <select {...register("category")} id="category" className="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-          <option value="" selected></option>
-          {categories.map(c=><option value={c}>{c}</option>)}
+        <select defaultValue="" {...register("category")} id="category" className="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+          <option value=""></option>
+          {categories.map((c,index)=><option key={index} value={c}>{c}</option>)}
         </select>
         {errors.category && (
           <p className="text-xs italic text-red-500 mt-2">

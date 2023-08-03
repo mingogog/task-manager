@@ -43,11 +43,11 @@ const TaskList: React.FC<Props> = ({tasks, deleteTask}: Props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredTasks.map(t=>{
+                            {filteredTasks.map((t, index)=>{
                                  return (
-                                    <tr>
+                                    <tr key={index}>
                                         <td className="w-1/4">{t.title}</td>
-                                        <td className="w-1/4">{`${t.dueDate.getFullYear()}/${t.dueDate.getMonth()}/${t.dueDate.getDate()}`}</td>
+                                        <td className="w-1/4">{t.date}</td>
                                         <td className="w-1/4">{t.category}</td>
                                         <td className="w-1/4">
                                             <button 

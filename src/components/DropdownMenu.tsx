@@ -26,9 +26,10 @@ const DropdownMenu: React.FC<DropdownMenu> = ({categoryType, setFilterType }:Dro
                     showingMenu&&
                     <div className="dropdown">
                         <ul>
-                            {categoryList.map(c=>{
+                            {categoryList.map((c, index)=>{
                                 return (
                                     <li 
+                                        key={index}
                                         onClick={()=>{
                                             setFilterType(c)
                                         }}
